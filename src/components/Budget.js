@@ -6,6 +6,10 @@ const Budget = () => {
     const { expenses } = useContext(AppContext);
     const [editableBudget, setEditableBudget] = useState(budget);
 
+    const totalExpenses = expenses.reduce((total, item) => {
+        return (total += item.cost);
+    }, 0);
+
     const handleBudgetChange = (e) => {
         const newBudget = e.target.value;
         setEditableBudget(newBudget);
@@ -14,7 +18,7 @@ const Budget = () => {
             alert("Warning! Your budget exceed 20000!")
             return;
         }
-        if (newBudget < expenses){
+        if (newBudget < totalExpenses){
             alert("Warning! Your budget is lower than the expenses ",expenses,"!")
             return;
         }
@@ -23,15 +27,14 @@ const Budget = () => {
     
     return (
         <div className='alert alert-secondary'>
-            <span>Budget: £  
+            <span>Budget: £  </span>
                 <input
                     required='required'
                     type='number'
                     id='budget'
                     value={editableBudget}
                     onChange={handleBudgetChange}
-                />
-            </span>
+                />   
         </div>
     );
     
