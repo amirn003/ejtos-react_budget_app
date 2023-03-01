@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
-    const { budget, dispatch } = useContext(AppContext);
+    const { budget, currency, dispatch } = useContext(AppContext);
     const { expenses } = useContext(AppContext);
     const [editableBudget, setEditableBudget] = useState(budget);
 
@@ -27,15 +27,18 @@ const Budget = () => {
     
     return (
         <div className='alert alert-secondary'>
-            <span>Budget: £  </span>
+            <span>Budget: {currency}  
                 <input
                     required='required'
                     type='number'
                     id='budget'
                     value={editableBudget}
                     onChange={handleBudgetChange}
-                />   
+                /> 
+            </span>
         </div>
+
+        
     );
     
 };
